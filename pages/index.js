@@ -6,7 +6,6 @@ import PostList from '../components/PostList'
 export default () => (
   <App>
     <Header />
-    <Submit />
     <PostList />
   </App>
 )
