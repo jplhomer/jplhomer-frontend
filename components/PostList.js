@@ -5,13 +5,13 @@ import ErrorMessage from './ErrorMessage'
 export const allPostsQuery = gql`
   query allPosts($first: Int!) {
     posts(first: $first) {
-      edges {
-        node {
-          id
-          link
-          title
-          date
-        }
+      nodes {
+        id
+        link
+        title
+        date
+        slug
+        redirectUrl
       }
     }
   }
@@ -30,11 +30,11 @@ export default function PostList () {
         return (
           <section>
             <ul>
-              {posts.edges.map(({ node: post }, index) => (
+              {posts.nodes.map((post, index) => (
                 <li key={post.id}>
                   <div>
                     <span>{index + 1}. </span>
-                    <a href={post.link} dangerouslySetInnerHTML={{ __html: post.title }}></a>
+                    <a href={postLink(post)} dangerouslySetInnerHTML={{ __html: post.title }}></a>
                   </div>
                 </li>
               ))}
@@ -82,4 +82,10 @@ export default function PostList () {
       }}
     </Query>
   )
+}
+
+function postLink(post) {
+  if (post.redirectUrl) return post.redirectUrl;
+
+  return `/post/${post.slug}`;
 }

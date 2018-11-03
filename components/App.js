@@ -37,6 +37,10 @@ export default ({ children }) => (
       button:focus {
         outline: none;
       }
+      img,
+      figure {
+        max-width: 100%;
+      }
     `}</style>
   </main>
 )
