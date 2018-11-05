@@ -4,6 +4,7 @@ import Error from 'next/error';
 import Header from '../components/Header'
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import Head from 'next/head';
 
 const POST_QUERY = gql`
   query POST_QUERY($slug: String!) {
@@ -40,6 +41,9 @@ class Post extends Component {
 
             return (
               <div>
+                <Head>
+                  <title>{post.title}</title>
+                </Head>
                 <h1 dangerouslySetInnerHTML={{
                     __html: post.title
                 }} />
